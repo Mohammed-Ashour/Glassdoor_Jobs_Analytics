@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jul 17 17:34:33 2020
 
-@author: M-Ashour
-"""
  #Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
