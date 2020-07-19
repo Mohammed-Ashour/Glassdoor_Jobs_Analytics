@@ -4,9 +4,8 @@ This repo is for a small cool project to do some analytics on glassdoor listings
   * The scraper script to scrape jobs from glassdoor
   * An example script to use the scraper
   * Data cleaning script
-  
-### :clipboard: TODO 
   * The Analytics script
+### :clipboard: TODO 
   * Regression Model for Salary Estimation
   * Dashboard
   
