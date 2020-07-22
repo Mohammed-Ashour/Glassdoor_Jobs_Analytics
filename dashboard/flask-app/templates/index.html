@@ -4,8 +4,20 @@
     {% include 'navbar.html' %}
     
     <h1>Industrie job posts</h1>
+    <div id="container">
+    <div id= "first" >
+
         {{ div|safe }}
         {{ script|safe }}
-        
+        </div>
+        <div id="second">
+        {{ div_titles|safe }}
+        {{ script_titles|safe }}
+        </div>
+        <div id="second">
+        {{ div_companies|safe }}
+        {{ script_companies|safe }}
+        </div>
+    </div>
 
 {% endblock %}

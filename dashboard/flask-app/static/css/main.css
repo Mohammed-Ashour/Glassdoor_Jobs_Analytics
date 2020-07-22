@@ -13,3 +13,23 @@
     background-color:#fff;
     color:#2c3e50;
 }
+
+#container {
+    width: 300px;
+    display: inline;
+}
+#first {
+   display: inline-block;
+    float:left;
+    margin-right: 10px;
+}
+#second {
+    display: inline-block;
+    float:left;
+    margin-left: 50px;
+    margin-right: 10px;
+
+}
+#clear {
+    clear: both;
+}

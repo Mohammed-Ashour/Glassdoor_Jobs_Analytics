@@ -15,25 +15,40 @@ df = pd.read_csv("../data/salaries_analysis_cleaned.csv")
 
 app = Flask(__name__)
  
-@app.route('/', methods=['GET', 'POST'])
-def chart():
-    x_data = list(df["Industry"].value_counts().index)[:10]
-    y_data = list(df["Industry"].value_counts())[:10]
+
+def plot(x_data, y_data, title):
+    x = list(x_data)[:10]
+    y = list(y_data)[:10]
     
-    p = figure(x_range=x_data, plot_height=500, title="Industry Counts",
-           toolbar_location=None, tools="", plot_width=1000)
-    p.vbar(x=x_data, top=y_data, width=2)
+    p = figure(x_range=x, plot_height=500, title=title,
+           toolbar_location=None)
+    p.vbar(x=x, top=y, width=1)
 
     p.xgrid.grid_line_color = None
     p.y_range.start = 0
-    # x = np.arange(2, 50, step=.5)
-    # y = np.sqrt(x) + np.random.randint(2,50)
-    # plot = figure(plot_width=400, plot_height=400,title=None, toolbar_location="below")
-    # plot.circle(x,y)
+
     p.xaxis.major_label_orientation = 1
     script, div = components(p)
-    kwargs = {'script': script, 'div': div}
-    kwargs['title'] = 'bokeh-with-flask'    
+    return script, div
+@app.route('/', methods=['GET', 'POST'])
+
+def chart():
+
+    script_industries,  div_industries = plot(df["Industry"].value_counts().index\
+                                              , df["Industry"].value_counts(),
+                                              title="Industry Job Posts Count")
+    script_companies, div_companies = plot(df["Company Name"].value_counts().index\
+                                              , df["Company Name"].value_counts(),\
+                                              title="Company Job Posts Count")
+    script_titles, div_titles = plot(df["Job Title"].value_counts().index\
+                                              , df["Job Title"].value_counts(),\
+                                              title="Titles Job Posts Count")
+    
+    
+    kwargs = {'script': script_industries, 'div': div_industries,  'script_titles':script_titles\
+              ,'div_titles': div_titles,\
+             'script_companies':script_companies\
+              ,'div_companies': div_companies}
     return render_template('index.html', **kwargs)   
 
 
