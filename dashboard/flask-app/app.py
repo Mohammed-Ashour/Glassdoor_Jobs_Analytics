@@ -1,8 +1,10 @@
+import logging
+import itertools
 
 import math
 import numpy as np
 import pandas as pd
-
+import flask
 from bokeh.embed import components
 from bokeh.models import ColumnDataSource, HoverTool, PrintfTickFormatter
 from bokeh.plotting import figure
@@ -15,7 +17,10 @@ df = pd.read_csv("../data/salaries_analysis_cleaned.csv")
     
 
 app = Flask(__name__)
- 
+TECHNOLOGIES = ["python", " r ", "scala", "java", "sql", "nosql",\
+                "julia", "matlab","spark", "hadoop", "tensorflow",\
+                "pytorch", "pandas", "numpy", "scipy", "nodejs",\
+                "js", "javascript", "aws", "azure"]
 
 def plot(x_data, y_data, title):
     x = [str(i) for i in list(x_data)[:10]]
@@ -31,8 +36,32 @@ def plot(x_data, y_data, title):
     p.xaxis.major_label_orientation = 1
     script, div = components(p)
     return script, div
-@app.route('/', methods=['GET', 'POST'])
 
+def job_desc_analysis(job):
+    counts = []
+    jobs_desc = df[df["Job Title"]==job]["job_description_cleaned"]
+    total_jobs_desc = ""
+    for i in jobs_desc:
+        total_jobs_desc +=" " + i
+    # jobs_desc =  list(itertools.chain.from_iterable(jobs_desc))
+    # print(jobs_desc)
+    for w in TECHNOLOGIES:
+        counts.append(total_jobs_desc.count(w))
+    w_counts = list(zip(TECHNOLOGIES, counts))
+    app.logger.info(w_counts)
+    w_counts.sort(key = lambda x : x[1], reverse=True)
+    return w_counts[:10]
+            
+    
+
+
+
+
+
+
+
+
+@app.route('/', methods=['GET', 'POST'])
 def chart():
     cat_cols = ["Industry", "python", "R","is_headquarters", "seniority", "Job Title"]
     kwargs = dict()
@@ -59,6 +88,14 @@ def chart():
     #           ,'div_titles': div_titles,\
     #           'script_companies':script_companies\
     #           ,'div_companies': div_companies}
+    
+    for i in df["Job Title"].unique():
+        analysis = job_desc_analysis(i)
+        final = ""
+        for j in analysis:
+            final += str(j[0]) + " -> " + str(j[1]) + " <br> "
+        kwargs[i.replace(" ", "_")] = final
+        
     return render_template('index.html', **kwargs)   
 
 

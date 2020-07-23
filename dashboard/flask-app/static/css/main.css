@@ -29,3 +29,26 @@
 #clear {
     clear: both;
 }
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+
+  text-wrap: center;
+word-wrap: break-word;
+}
+
+td, th {
+"word-wrap: break-word
+  border: 1px solid #dddddd;
+  text-wrap: center;
+word-wrap: break-word;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+  text-wrap: normal;
+word-wrap: break-word;
+}

@@ -36,6 +36,26 @@
         </div>
     </div>
     </div>
+    
+    <table>
+  <tr>
+    <th>SW Engineer</th>
+    <th>ML Engineer</th>
+    <th>Data Scientist</th>
+    <th>Data Engineer</th>
+  </tr>
+  <tr>
+    <td>{% autoescape false %}
+                {{software_engineer}}
+        {% endautoescape %}</td>
+    <td>{% autoescape false %} 
+                    {{ml_engineer}}
+                    {% endautoescape %}</td>
+    <td>{% autoescape false %} {{data_scientist}} {% endautoescape %}</td>
+    <td>{% autoescape false %} {{data_engineer}} {% endautoescape %}</td>
+
+  </tr>
+</table>
 
 {% endblock %}
 
