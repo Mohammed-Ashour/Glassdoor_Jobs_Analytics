@@ -8,17 +8,36 @@
 
     <div id= "first" >
 
-        {{ div|safe }}
-        {{ script|safe }}
+        {{ Industry_div|safe }}
+        {{ Industry_script|safe }}
         </div>
         <div id="second">
-        {{ div_titles|safe }}
-        {{ script_titles|safe }}
+        {{ python_div|safe }}
+        {{ python_script|safe }}
+        </div>
+    </div>
+    <div id="container">
+         <div id="first">
+        {{is_headquarters_div|safe }}
+        {{ is_headquarters_script|safe }}
+        </div>
+         <div id="second">
+        {{ seniority_div|safe }}
+        {{ seniority_script|safe }}
+        </div>
+        </div>
+         <div id="second">
+        {{ Job_Title_div|safe }}
+        {{ Job_Title_script|safe }}
         </div>
         <div id="second">
-        {{ div_companies|safe }}
-        {{ script_companies|safe }}
+        {{ R_div|safe }}
+        {{ R_script|safe }}
         </div>
+    </div>
     </div>
 
 {% endblock %}
+
+
+["Industry", "python", "R","is_headquarters", "seniority", "Job Title"]
