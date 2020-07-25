@@ -37,24 +37,24 @@
     </div>
     </div>
     
-    <table>
+ <table class="table table-striped">
   <tr>
-    <th>SW Engineer</th>
-    <th>ML Engineer</th>
-    <th>Data Scientist</th>
-    <th>Data Engineer</th>
+  {% for item in total_analysis %}
+    <th>{{item[0]}}</th>
+    {%endfor%}
   </tr>
+  
+  {%for i in range(total_analysis[0][1]|length) %}
   <tr>
+     {% for j in range(total_analysis|length)%}
     <td>{% autoescape false %}
-                {{software_engineer}}
+    
+           <b>     {{total_analysis[j][1][i+1]}} </b>
         {% endautoescape %}</td>
-    <td>{% autoescape false %} 
-                    {{ml_engineer}}
-                    {% endautoescape %}</td>
-    <td>{% autoescape false %} {{data_scientist}} {% endautoescape %}</td>
-    <td>{% autoescape false %} {{data_engineer}} {% endautoescape %}</td>
+   {%endfor%}
 
   </tr>
+  {%endfor%}
 </table>
 
 {% endblock %}

@@ -88,13 +88,19 @@ def chart():
     #           ,'div_titles': div_titles,\
     #           'script_companies':script_companies\
     #           ,'div_companies': div_companies}
-    
+    total_analysis = []
     for i in df["Job Title"].unique():
         analysis = job_desc_analysis(i)
-        final = ""
-        for j in analysis:
-            final += str(j[0]) + " -> " + str(j[1]) + " <br> "
-        kwargs[i.replace(" ", "_")] = final
+        # final = ""
+        # for j in analysis:
+        #     final += str(j[0]) + " -> " + str(j[1]) + " <br> "
+        # kwargs[i.replace(" ", "_")] = analysis
+        analysis = [i,analysis]
+        
+        total_analysis.append(analysis)
+    kwargs["total_analysis"] = total_analysis
+    
+        
         
     return render_template('index.html', **kwargs)   
 
